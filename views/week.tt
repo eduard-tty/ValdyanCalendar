@@ -1,0 +1,17 @@
+<h1 class="center">
+    Week [% week %]
+    of <a href="/[% year %]/[% season + 1 %]">[% seasons.$season %]</a>
+    of the year
+    <a href="/[% year %]">[% year %]</a>
+</h1>
+
+<div class="calendar">
+    <table class="calendar week">
+    [% FOREACH day IN days %]
+        <tr>
+            <td class="vlabel">[% day %]</td>
+            [% include cell.tt %]
+        </tr>
+    [% END %]
+    </table>
+</div>

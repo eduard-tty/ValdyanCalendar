@@ -1,0 +1,5 @@
+<td class="day">
+    <div class="cell" title="[%- data.$year.$season.$week.$day -%]">
+      [%- data.$year.$season.$week.$day -%]
+    </div>
+</td>

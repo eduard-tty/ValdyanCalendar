@@ -1,0 +1,120 @@
+
+body {
+    font-family: 'Linux Libertine', Palatino, 'Palatino Linotype', 'Book Antiqua', Georgia, 'Times New Roman', serif;
+    margin: 0;
+    margin-bottom: 25px;
+    padding: 0;
+    background-color: #ddd;
+    background-repeat: no-repeat;
+    font-size: 13px;
+    color: #333;
+}
+
+h1 {
+    text-align: left;
+    font-size: xx-large;
+    font-family: sans-serif;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+a { text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+#footer {  text-align: center; }
+
+
+.hlabel {
+    color: white;
+    text-align: center;
+}
+
+.vlabel{
+    text-align: right;
+    padding-right: 1ex;
+    border-style: none;
+    color: white;
+}
+
+ul.jumplist {
+    float: right;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+ul.jumplist li {
+    display: inline;
+    padding: 0;
+}
+
+table.calendar, table.calendar tbody table.calendar tr, table.calendar td {
+    margin: 0;
+}
+
+table.calendar td.feast {
+    font-weight: bold;
+    font-size: larger;
+}
+
+table.calendar div.cell {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    text-align: left;
+    font-size: smaller;
+}
+
+table.calendar.year div.cell {
+    height: 30px;
+    max-height: 30px;
+    min-height: 30px;
+}
+
+table.calendar.season div.cell {
+    height: 60px;
+    max-height: 60px;
+    min-height: 60px;
+}
+
+table.calendar.week div.cell {
+    height: 80px;
+    max-height: 80px;
+    min-height: 80px;
+}
+
+
+table.calendar td {
+    overflow: none;
+}
+
+div.calendar  {
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+table.year { width: 50%; }
+table.season { width: 100%; }
+table.week { width: 100%; }
+
+
+table.calendar  {
+    background-color: #69f;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #ccc;
+    margin-bottom: 2px;
+    margin-top: 1em;
+    float: left;
+}
+
+table.calendar td {
+    width: 12.5%;
+    background-color: #69f;
+    overflow: none;
+}
+
+table.calendar td.day {
+    background-color: #7cf;
+}

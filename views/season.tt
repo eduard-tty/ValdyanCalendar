@@ -1,0 +1,8 @@
+<h1 class="center">
+    Season of [% seasons.$season %]
+    of the year <a href="/[% year %]">[% year %]</a>
+</h1>
+
+<div class="calendar">
+    [%- include season_table.tt display="season" %]
+</div>
