@@ -4,7 +4,6 @@
         <meta http-equiv="Content-type" content="text/html; charset=[% settings.charset %]" />
         <title>ValdyanCalendar</title>
         <link rel="stylesheet" href="[% request.base %]/css/style.css" />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript"></script>
         <script type="text/javascript">/* <![CDATA[ */
             !window.jQuery && document.write('<script type="text/javascript" src="[% request.base%]/javascripts/jquery.js"><\/script>')
         /* ]]> */</script>

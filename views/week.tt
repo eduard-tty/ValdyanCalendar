@@ -4,12 +4,12 @@
     of the year
     <a href="/[% year %]">[% year %]</a>
 </h1>
-
+[%- include datenav.tt -%]
 <div class="calendar">
     <table class="calendar week">
-    [% FOREACH day IN days %]
+    [% FOREACH day IN [1..7] %]
         <tr>
-            <td class="vlabel">[% day %]</td>
+            <td class="vlabel">[% y = day - 1; days.$y %]</td>
             [% include cell.tt %]
         </tr>
     [% END %]

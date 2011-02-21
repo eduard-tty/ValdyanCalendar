@@ -1,17 +1,6 @@
-<h1 class="center">Year [% year %]</h1>
-
-<ul class="jumplist">
-    <li>&nbsp;&nbsp;<a href="/0">|&lt;</a></li>
-    <li>&nbsp;&nbsp;<a href="/[% year - 100 %]">&lt;&lt;&lt;</a></li>
-    <li>&nbsp;&nbsp;<a href="/[% year - 10 %]">&lt;&lt;</a> </li>
-    <li>&nbsp;&nbsp;<a href="/[% year - 1 %]">&lt;</a> </li>
-    <li>&nbsp;&nbsp;<a href="/">Up</a> </li>
-    <li>&nbsp;&nbsp;<a href="/[% year + 1 %]">&gt;</a> </li>
-    <li>&nbsp;&nbsp;<a href="/[% year + 10 %]">&gt;&gt;</a> </li>
-    <li>&nbsp;&nbsp;<a href="/[% year + 100 %]">&gt;&gt;&gt;</a> </li>
-    <li>&nbsp;&nbsp;<a href="/10000 ">&gt;|</a> </li>
-</ul>
-
+<h1 class="center">Year [% year %]
+</h1>
+[%- include datenav.tt -%]
 <div  class="calendar">
 [%- FOREACH season IN [0..3] -%]
     [%- include season_table.tt display="year" -%]

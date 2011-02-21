@@ -2,7 +2,7 @@
     Season of [% seasons.$season %]
     of the year <a href="/[% year %]">[% year %]</a>
 </h1>
-
+[%- include datenav.tt -%]
 <div class="calendar">
     [%- include season_table.tt display="season" %]
 </div>

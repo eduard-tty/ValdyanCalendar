@@ -16,12 +16,16 @@ h1 {
     font-family: sans-serif;
     margin-top: 0px;
     margin-bottom: 0px;
+    text-align: center;
 }
 
 a { text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-#footer {  text-align: center; }
+#footer {
+    clear: both;
+    text-align: center;
+}
 
 
 .hlabel {
@@ -30,16 +34,19 @@ a:hover { text-decoration: underline; }
 }
 
 .vlabel{
+    width: 30px;
     text-align: right;
     padding-right: 1ex;
     border-style: none;
     color: white;
+    vertical-align: top;
 }
 
 ul.jumplist {
-    float: right;
     margin-top: 0px;
     margin-bottom: 0px;
+    text-align: center;
+    font-size: larger;
 }
 ul.jumplist li {
     display: inline;
@@ -92,12 +99,13 @@ div.calendar  {
     padding-right: 2em;
     padding-top: 0;
     padding-bottom: 0;
+    clear: both;
 }
 
-table.year { width: 50%; }
+table.year   { width: 50%; }
 table.season { width: 100%; }
-table.week { width: 100%; }
-
+table.week   { width: 100%; }
+table.week td.day { width: 80%; }
 
 table.calendar  {
     background-color: #69f;
