@@ -7,11 +7,24 @@
 [%- include datenav.tt -%]
 <div class="calendar">
     <table class="calendar week">
+[%- IF week > 0 -%]
     [% FOREACH day IN [1..7] %]
         <tr>
-            <td class="vlabel">[% y = day - 1; days.$y %]</td>
+            <td class="vlabel">
+                <a href="/[% year %]/[% season + 1 %]/[% week %]/[% day %]">
+                    [% y = day - 1; days.$y %]
+                </a>
+            </td>
             [% include cell.tt %]
         </tr>
     [% END %]
+[%- ELSE -%]
+    [% FOREACH day IN [0..leap_year] %]
+        <tr>
+            <td class="vlabel">Day [% day +1 %] of [% seasons.$season %]</td>
+            [% d = day +1 ; include cell.tt day = d %]
+        </tr>
+    [%- END -%]
+[%- END -%]    
     </table>
 </div>

@@ -4,7 +4,7 @@ body {
     margin: 0;
     margin-bottom: 25px;
     padding: 0;
-    background-color: #ddd;
+    background-color: #aaa;
     background-repeat: no-repeat;
     font-size: 13px;
     color: #333;
@@ -16,10 +16,16 @@ h1 {
     font-family: sans-serif;
     margin-top: 0px;
     margin-bottom: 0px;
+}
+
+h1,h2 {
     text-align: center;
 }
 
-a { text-decoration: none; }
+a {
+    text-decoration: none;
+    color: #fff;
+}
 a:hover { text-decoration: underline; }
 
 #footer {
@@ -106,6 +112,7 @@ table.year   { width: 50%; }
 table.season { width: 100%; }
 table.week   { width: 100%; }
 table.week td.day { width: 80%; }
+table.day    { width: 100%; }
 
 table.calendar  {
     background-color: #69f;
