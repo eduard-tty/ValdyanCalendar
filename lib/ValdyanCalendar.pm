@@ -12,39 +12,64 @@ more then one event per day
 
 use YAML qw(LoadFile);
 
-my $FILENAME = 'data/data.yaml';
-my $AUTOTAG_MIN = 2;
+my $FILENAME = 'data/timeline.yaml';
 
 my @days    = qw( Dochein Nanei Anshein Naighei Mizrein Timoinei nafur );
 my @seasons = qw( Timoine Anshen Mizran Naigha );
 
-my ($event_tree, @autotags) = mold_data($FILENAME);
+my ($autotags, $events) = init($FILENAME);
 
-use Data::Dumper;
-warn Dumper(\@autotags);
+sub ok { defined($_[0]) and length($_[0]) };
 
+sub init {
+    my ($filename) = @_;
+    my ($autotags, $events) = LoadFile($filename);
+    for my $e ( @$events )  {
+        $e->{'tags'} = '' unless ok($e->{'tags'});
+        $e->{'tags'} = [ split(/,\s*/, $e->{'tags'}) ];
+        $e->{'text'} = '' unless ok($e->{'text'});
+        $e->{'name'} = substr( $e->{'text'}, 0, 20) . '...';
+        my ($year, $season, $week, $day) = split('/',$e->{'date'});
+        $e->{'year'} = $year; 
+        $e->{'season'} = $season; 
+        $e->{'week'} = $week; 
+        $e->{'day'} = $day; 
+    };
+    my @events = sort by_date @$events;
+    return ( $autotags, \@events );
+};
 
-sub mold_data  {
-    my ($path) = @_;
+sub by_date {
+    return
+        $a->{'year'}   <=> $b->{'year'}
+        ||
+        $a->{'season'} <=> $b->{'season'}
+        ||
+        $a->{'week'}   <=> $b->{'week'}
+        ||
+        $a->{'day'}    <=> $b->{'day'};
+};
 
-    my $events = LoadFile($path);
-    my $stash = {};
-    my %autotags = ();
-    while ( my($date, $event) = each(%$events) )  {
-        my ($year, $season, $week, $day ) = split('/', $date);
-        next unless $day;
-        $stash->{$year}{$season-1}{$week}{$day} = $event;
-        $autotags{$_}++ for split(/\W+/, $event);
+sub make_tree  {
+    my ($date, $events) = @_;
+    
+    my $one_year_later = $date;
+    $one_year_later->{'year'} += 1;
+    my $event_tree = {};
+    for my $e ( $events ) {      
+        next unless after($e, $date);
+        last if after($e, $one_year_later); 
+        $event_tree->{ $e->{'year'} }{ $e->{'season'} -1 }{ $e->{'week'} }{ $e->{'day'} } = $e;
     }
 
-    return ( $stash, grep { $autotags{$_} >= $AUTOTAG_MIN } keys(%autotags) );
+    return $event_tree;
 };
 
 before_template sub {
     my ($tokens) = @_;
     my $year   = $tokens->{'year'};
     $tokens->{'leap_year'} = 0 == $year % 4 if defined $year;
-    $tokens->{'events'} = $event_tree;
+    $tokens->{'events'} = make_tree($tokens, $events) unless $tokens->{'events'};
     $tokens->{'days'} = \@days;
     $tokens->{'seasons'} = \@seasons;
 
@@ -58,7 +83,9 @@ get '/' => sub {
 };
 
 get '/list' => sub {
-    return template 'list';
+    return template 'list', {
+        events => $events,
+    };
 };
 
 
