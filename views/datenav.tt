@@ -1,0 +1,12 @@
+<ul class="jumplist">
+    <li>&nbsp;&nbsp;<a href="/">Home</a></li>
+    <li>&nbsp;&nbsp;<a href="/0">|&lt;</a></li>
+    <li>&nbsp;&nbsp;<a href="/[% year - 100 %]">&lt;&lt;&lt;</a></li>
+    <li>&nbsp;&nbsp;<a href="/[% year - 10 %]">&lt;&lt;</a> </li>
+    <li>&nbsp;&nbsp;<a href="/[% year - 1 %]">&lt;</a> </li>
+    <li>&nbsp;&nbsp;<a href="/">^</a> </li>
+    <li>&nbsp;&nbsp;<a href="/[% year + 1 %]">&gt;</a> </li>
+    <li>&nbsp;&nbsp;<a href="/[% year + 10 %]">&gt;&gt;</a> </li>
+    <li>&nbsp;&nbsp;<a href="/[% year + 100 %]">&gt;&gt;&gt;</a> </li>
+    <li>&nbsp;&nbsp;<a href="/10000 ">&gt;|</a> </li>
+</ul>

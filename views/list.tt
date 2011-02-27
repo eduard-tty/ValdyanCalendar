@@ -1,0 +1,15 @@
+<h1>A list of  events</h1>
+<table>
+[%- FOREACH e IN events -%]
+        <tr>
+            <td class="right">
+<a href="/[%- e.year -%]">[%- e.year -%]</a>/<a
+    href="/[%- e.year -%]/[%- e.season +1 -%]">[%- e.season + 1 -%]</a>/<a
+    href="/[%- e.year -%]/[%- e.season +1 -%]/[%- e.week -%]">[%- e.week -%]</a>/<a
+    href="/[%- e.year -%]/[%- e.season +1 -%]/[%- e.week -%]/[%- e.day-%]">[%- e.day -%]</a>
+            </td>
+            <td>[%- e.text -%]</td>
+        </td>
+[%- END -%]
+</table>
+

@@ -1,0 +1,15 @@
+<h1 class="center">
+    Day [% day %] 
+    of week [% week %]
+    of <a href="/[% year %]/[% season + 1 %]">[% seasons.$season %]</a>
+    of the year
+    <a href="/[% year %]">[% year %]</a>
+</h1>
+[%- include datenav.tt -%]
+<div class="calendar">
+    <table class="calendar day">
+        <tr>
+            [% include cell.tt %]
+        </tr>
+    </table>
+</div>
