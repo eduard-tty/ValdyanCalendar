@@ -1,12 +1,15 @@
 package ValdyanCalendar;
 use Dancer ':syntax';
 
+use Data::Dumper;
+
 our $VERSION = '0.1';
 
 =head1 TODO
 
-autotags
-more then one event per day
+- autotags
+- more then one event per day
+- all dat files in dir 
 
 =cut
 
@@ -18,6 +21,7 @@ my @days    = qw( Dochein Nanei Anshein Naighei Mizrein Timoinei nafur );
 my @seasons = qw( Timoine Anshen Mizran Naigha );
 
 my ($autotags, $events) = init($FILENAME);
+my $event_tree = make_tree($events);
 
 sub ok { defined($_[0]) and length($_[0]) };
 
@@ -51,15 +55,13 @@ sub by_date {
 };
 
 sub make_tree  {
-    my ($date, $events) = @_;
+    my ($events) = @_;
     
-    my $one_year_later = $date;
-    $one_year_later->{'year'} += 1;
     my $event_tree = {};
-    for my $e ( $events ) {      
-        next unless after($e, $date);
-        last if after($e, $one_year_later); 
-        $event_tree->{ $e->{'year'} }{ $e->{'season'} -1 }{ $e->{'week'} }{ $e->{'day'} } = $e;
+    for my $e ( @$events ) {
+        push @{
+            $event_tree->{ $e->{'year'} }{ $e->{'season'} -1 }{ $e->{'week'} }{ $e->{'day'} }
+        }, $e;
     }
 
     return $event_tree;
@@ -69,7 +71,7 @@ before_template sub {
     my ($tokens) = @_;
     my $year   = $tokens->{'year'};
     $tokens->{'leap_year'} = 0 == $year % 4 if defined $year;
-    $tokens->{'events'} = make_tree($tokens, $events) unless $tokens->{'events'};
+    $tokens->{'events'} = $event_tree unless $tokens->{'events'};
     $tokens->{'days'} = \@days;
     $tokens->{'seasons'} = \@seasons;
 
