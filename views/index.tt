@@ -1,5 +1,10 @@
 <h1>A Vandyan Calendar</h1>
-<h2>Based on yaml files in '[%- datadir -%]'.</h2>
+<h2>Based on the following yaml files in '[%- data_dir -%]'.</h2>
+<ul>
+[%- FOR filename IN data_files -%]
+    <li>[%- filename -%]</li>
+[%- END -%]
+</ul>
 <p>You can view at as <a href="/list">a list of events</a>
 or <a href="/500">go to a specific</a>,
 <a href="/500">season</a>,

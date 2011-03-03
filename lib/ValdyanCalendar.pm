@@ -15,7 +15,8 @@ our $VERSION = '0.1';
 
 use YAML qw(LoadFile);
 
-my $DATA_DIR = 'data/';
+my $DATA_DIR = 'data';
+my @DATA_FILES = glob("$DATA_DIR/*.yaml");
 
 my @days    = qw( Dochein Nanei Anshein Naighei Mizrein Timoinei nafur );
 my @seasons = qw( Timoine Anshen Mizran Naigha );
@@ -29,7 +30,7 @@ sub init  {
     my ($dir) = @_;
 
     my @events = ();
-    for my $filename ( glob("$dir/*.yaml") ) {
+    for my $filename ( @DATA_FILES ) {
         push @events, init_file($filename);
     };
     
@@ -107,7 +108,8 @@ before_template sub {
 
 get '/' => sub {
     return template 'index', {
-        datadir  => $DATA_DIR,
+        data_dir  => $DATA_DIR,
+        data_files => [ map { s{$DATA_DIR/}{}; $_ } @DATA_FILES ],
     };
 };
 
