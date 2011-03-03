@@ -22,7 +22,7 @@
     [% FOREACH day IN [0..leap_year] %]
         <tr>
             <td class="vlabel">Day [% day +1 %] of [% seasons.$season %]</td>
-            [% d = day +1 ; include cell.tt day = d %]
+            [% d = day +1 ; include cell.tt day = d display='text' %]
         </tr>
     [%- END -%]
 [%- END -%]    
