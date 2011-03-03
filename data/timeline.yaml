@@ -1,5 +1,4 @@
 ---
-- on the
 - Ysella
 - White whale
 ---
@@ -14,6 +13,3 @@
 - name: Third event
   date: 612/3/13/1
   text: This is the third event.
-- name: Third event copy
-  date: 612/3/13/1
-  text: This is the third event later that day.

@@ -7,26 +7,38 @@ our $VERSION = '0.1';
 
 =head1 TODO
 
-- all dat files in dir
-- break on whole word
+- all data files in dir
 - default values for template arguments
+- inprecise date
 
 =cut
 
 use YAML qw(LoadFile);
 
-my $FILENAME = 'data/timeline.yaml';
+my $DATA_DIR = 'data/';
 
 my @days    = qw( Dochein Nanei Anshein Naighei Mizrein Timoinei nafur );
 my @seasons = qw( Timoine Anshen Mizran Naigha );
 
-my $events = init($FILENAME);
+my $events = init($DATA_DIR);
 my $event_tree = make_tree($events);
-
 
 sub ok { defined($_[0]) and length($_[0]) };
 
-sub init {
+sub init  {
+    my ($dir) = @_;
+
+    my @events = ();
+    for my $filename ( glob("$dir/*.yaml") ) {
+        push @events, init_file($filename);
+    };
+    
+    @events = sort by_date @events;
+        
+    return \@events;
+};
+
+sub init_file {
     my ($filename) = @_;
     my ($autotags, $events) = LoadFile($filename);
     my $autotag_re_text = '(' . join('|', @$autotags) . ')';
@@ -35,15 +47,16 @@ sub init {
         $e->{'tags'} = '' unless ok($e->{'tags'});
         $e->{'tags'} = get_tags($e, $autotag_re);
         $e->{'text'} = '' unless ok($e->{'text'});
-        $e->{'name'} = substr( $e->{'text'}, 0, 20) . '...';
+        my $name = substr( $e->{'text'}, 0, 30);
+        $name =~ s/\s\S*$//;
+        $e->{'name'} =  $name.'...';
         my ($year, $season, $week, $day) = split('/',$e->{'date'});
         $e->{'year'} = $year; 
         $e->{'season'} = $season; 
         $e->{'week'} = $week; 
         $e->{'day'} = $day; 
     };
-    my @events = sort by_date @$events;
-    return \@events;
+    return @$events;
 };
 
 sub get_tags  {
@@ -51,7 +64,6 @@ sub get_tags  {
     my $tags = [ split(/,\s*/, $e->{'tags'}) ];
     my $text = $e->{'name'} . ' ' . $e->{'text'};
     while ( $text =~ m/$autotag_re/g ) {
-        warn $1;
         push @$tags, $1 if $1;
     }
 
@@ -95,7 +107,7 @@ before_template sub {
 
 get '/' => sub {
     return template 'index', {
-        filename  => $FILENAME,
+        datadir  => $DATA_DIR,
     };
 };
 

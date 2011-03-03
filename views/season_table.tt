@@ -15,7 +15,7 @@
     [% FOREACH week IN [1..13] %]
         <tr>
             <td class="vlabel"><a href="/[% year %]/[% season+1 %]/[% week %]">[% week %]</a></td>
-            [%- FOREACH day IN [1..7] -%] [%- include cell.tt  display='name' -%] [%- END -%]
+            [%- FOREACH day IN [1..7] -%] [%- include cell.tt display='name' -%] [%- END -%]
         </tr>
     [% END %]
 </table>
