@@ -2,6 +2,11 @@
     <div class="cell">
       [%- FOR day IN events.$year.$season.$week.$day -%]
         <span title="[%- day.text -%]">[%- day.$display -%]</span>
+        (
+        [%- FOR tag IN day.tags -%]
+            [%- tag -%],
+        [%- END -%]
+        )
         <BR />
       [%- END -%]
       &nbsp;

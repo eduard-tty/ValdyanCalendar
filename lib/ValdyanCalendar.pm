@@ -10,6 +10,7 @@ our $VERSION = '0.1';
 - autotags
 - all dat files in dir
 - break on whole work
+- default values for template arguments
 
 =cut
 
@@ -20,17 +21,19 @@ my $FILENAME = 'data/timeline.yaml';
 my @days    = qw( Dochein Nanei Anshein Naighei Mizrein Timoinei nafur );
 my @seasons = qw( Timoine Anshen Mizran Naigha );
 
-my ($autotags, $events) = init($FILENAME);
+my $events = init($FILENAME);
 my $event_tree = make_tree($events);
+
 
 sub ok { defined($_[0]) and length($_[0]) };
 
 sub init {
     my ($filename) = @_;
     my ($autotags, $events) = LoadFile($filename);
+    my $autotag_re_text = '(' . join('|', @$autotags) . ')'; # compile
     for my $e ( @$events )  {
         $e->{'tags'} = '' unless ok($e->{'tags'});
-        $e->{'tags'} = [ split(/,\s*/, $e->{'tags'}) ];
+        $e->{'tags'} = get_tags($e, $autotag_re_text);
         $e->{'text'} = '' unless ok($e->{'text'});
         $e->{'name'} = substr( $e->{'text'}, 0, 20) . '...';
         my ($year, $season, $week, $day) = split('/',$e->{'date'});
@@ -40,7 +43,20 @@ sub init {
         $e->{'day'} = $day; 
     };
     my @events = sort by_date @$events;
-    return ( $autotags, \@events );
+    return \@events;
+};
+
+sub get_tags  {
+    my ($e, $autotag_re_text) = @_;
+    warn $autotag_re_text;
+    my $tags = [ split(/,\s*/, $e->{'tags'}) ];
+    my $text = $e->{'name'} . ' ' . $e->{'text'};
+    while ( $text =~ m/$autotag_re_text/igo ) {
+        warn $1;
+        push @$tags, $1 if $1;
+    }
+
+    return $tags; #uniq
 };
 
 sub by_date {
