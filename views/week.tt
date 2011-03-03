@@ -15,7 +15,7 @@
                     [% y = day - 1; days.$y %]
                 </a>
             </td>
-            [% include cell.tt %]
+            [% include cell.tt display = 'text' %]
         </tr>
     [% END %]
 [%- ELSE -%]

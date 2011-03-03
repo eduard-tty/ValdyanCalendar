@@ -1,5 +1,9 @@
 <td class="day">
-    <div class="cell" title="[%- events.$year.$season.$week.$day -%]">
-      [%- events.$year.$season.$week.$day -%] &nbsp;
+    <div class="cell">
+      [%- FOR day IN events.$year.$season.$week.$day -%]
+        <span title="[%- day.text -%]">[%- day.$display -%]</span>
+        <BR />
+      [%- END -%]
+      &nbsp;
     </div>
 </td>

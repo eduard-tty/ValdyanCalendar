@@ -8,8 +8,8 @@ our $VERSION = '0.1';
 =head1 TODO
 
 - autotags
-- more then one event per day
-- all dat files in dir 
+- all dat files in dir
+- break on whole work
 
 =cut
 

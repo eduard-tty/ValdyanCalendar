@@ -4,7 +4,7 @@
             [%- IF 'season' == display -%]/0[%- END -%]
         ">[% seasons.$season %]</a></td>
         [%- include cell.tt week=0 day=1 -%]
-        [%- IF leap_year && season == 0 -%] [%- include cell.tt week=0 day=2 -%] [%- END -%]
+        [%- IF leap_year && season == 0 -%] [%- include cell.tt week=0 day=2 display='name' -%] [%- END -%]
     </tr>
     <tr>
         <td>&nbsp;</td>
@@ -15,7 +15,7 @@
     [% FOREACH week IN [1..13] %]
         <tr>
             <td class="vlabel"><a href="/[% year %]/[% season+1 %]/[% week %]">[% week %]</a></td>
-            [%- FOREACH day IN [1..7] -%] [%- include cell.tt -%] [%- END -%]
+            [%- FOREACH day IN [1..7] -%] [%- include cell.tt  display='name' -%] [%- END -%]
         </tr>
     [% END %]
 </table>

@@ -9,7 +9,7 @@
 <div class="calendar">
     <table class="calendar day">
         <tr>
-            [% include cell.tt %]
+            [% include cell.tt display='text' %]
         </tr>
     </table>
 </div>
